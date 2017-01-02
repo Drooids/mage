@@ -1,0 +1,4 @@
+# Binary and build directories should be excluded.
+bin
+build
+lib

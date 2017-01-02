@@ -1,0 +1,4 @@
+namespace Mage {
+	const int versionMajor = @Mage_VERSION_MAJOR@;
+	const int versionMinor = @Mage_VERSION_MINOR@;
+}
