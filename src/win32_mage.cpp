@@ -5,7 +5,7 @@
 #include <mage/engine/win32/render_system.hpp>
 #include <mage/engine/win32/render_context.hpp>
 #include <mage/engine/buffer.hpp>
-#include <mage/math/matrix.hpp>
+#include <math/matrix.hpp>
 #include <mage/ui/frame.hpp>
 
 

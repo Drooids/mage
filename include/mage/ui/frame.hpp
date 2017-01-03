@@ -5,7 +5,7 @@
 #include <mage/engine/shader.hpp>
 #include <mage/ui/layer.hpp>
 #include <mage/ui/element.hpp>
-#include <mage/math/matrix.hpp>
+#include <math/matrix.hpp>
 
 namespace Mage
 {

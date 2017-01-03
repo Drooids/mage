@@ -13,6 +13,7 @@ configure_file(
 )
 
 set(Mage_INCLUDE_PATH "${PROJECT_SOURCE_DIR}/include/mage")
+set(Math_INCLUDE_PATH "${PROJECT_SOURCE_DIR}/include/math")
 set(Mage_SOURCE_FILES "${PROJECT_BINARY_DIR}/include/configuration.hpp")
 
 # Parse the CMakeLists files in the subdirectories now.

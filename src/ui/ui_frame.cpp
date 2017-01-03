@@ -2,7 +2,7 @@
 #include <mage/engine/render_canvas.hpp>
 #include <mage/engine/exception.hpp>
 
-#include <mage/math/transform.hpp>
+#include <math/transform.hpp>
 
 Mage::UI::Frame::Frame(const std::string& name, Layer& layer) :
 Element(name, layer), 

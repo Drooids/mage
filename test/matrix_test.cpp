@@ -1,6 +1,6 @@
 #include <gtest/gtest.h>
 
-#include <mage/math/matrix.hpp>
+#include <math/matrix.hpp>
 
 TEST(MatrixTest, MatRxCAddition)
 {

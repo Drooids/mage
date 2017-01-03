@@ -12,7 +12,7 @@
 #include <mage/noncopyable.hpp>
 #include <mage/engine/texture.hpp>
 #include <mage/engine/text/engine.hpp>
-#include <mage/math/vector2.hpp>
+#include <math/vector2.hpp>
 
 namespace Mage
 {

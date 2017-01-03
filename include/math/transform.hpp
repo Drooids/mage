@@ -1,6 +1,6 @@
 #pragma once
 
-#include <mage/math/matrix.hpp>
+#include <math/matrix.hpp>
 
 namespace Math
 {

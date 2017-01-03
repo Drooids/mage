@@ -48,8 +48,9 @@ set(Mage_ENGINE_TEXT_HEADERS
 	"${Mage_INCLUDE_PATH}/engine/text/font.hpp")
 
 set(Mage_MATH_HEADERS
-	"${Mage_INCLUDE_PATH}/math/matrix.hpp"
-	"${Mage_INCLUDE_PATH}/math/vector2.hpp")
+	"${Math_INCLUDE_PATH}/matrix.hpp"
+	"${Math_INCLUDE_PATH}/vector2.hpp"
+	"${Math_INCLUDE_PATH}/transform.hpp")
 
 set(Mage_UI_HEADERS
 	"${Mage_INCLUDE_PATH}/ui/element.hpp"
