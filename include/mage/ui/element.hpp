@@ -25,7 +25,7 @@ namespace Mage
 				// do nothing ..
 			}
 
-			void draw() const override
+			void draw() override
 			{
 				for (auto& e : m_elements)
 					e->draw();

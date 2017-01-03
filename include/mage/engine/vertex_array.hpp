@@ -11,11 +11,12 @@ namespace Mage
 	protected:
 		GLuint m_handle;
 
+
 	public:
 		VertexArray();
 		~VertexArray();
 
-		void bind() const noexcept;
+		void bind() const;
 
 		GLuint get_handle() const noexcept
 		{

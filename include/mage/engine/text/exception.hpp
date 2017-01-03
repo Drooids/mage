@@ -12,7 +12,7 @@ namespace Mage
 {
 	class TextException : public Exception
 	{
-		static const char* getErrorMsg(FT_Error err)
+		static const char* get_error_msg(FT_Error err)
 		{
 			#undef __FTERRORS_H__
 			#define FT_ERRORDEF(e, v, s) case e: return s;
@@ -34,7 +34,7 @@ namespace Mage
 
 			if (err)
 			{
-				ss << ": " << getErrorMsg(err);
+				ss << ": " << get_error_msg(err);
 			}
 
 			emsg = ss.str();

@@ -40,7 +40,7 @@ Mage::Program::Shader::~Shader()
 	glDeleteShader(m_handle);
 }
 
-void Mage::Program::Shader::addSource(const char* src)
+void Mage::Program::Shader::add_source(const char* src)
 {
 	if (m_hasSource) return;
 
@@ -103,10 +103,10 @@ Mage::Program::~Program()
 	}
 }
 
-void Mage::Program::addShaderSource(const std::string& src, ShaderType t)
+void Mage::Program::add_shader_source(const std::string& src, ShaderType t)
 {
 	Shader s(t);
-	s.addSource(src.c_str());
+	s.add_source(src.c_str());
 
 	switch (t)
 	{
@@ -147,21 +147,21 @@ void Mage::Program::link()
 	m_frag->compile();
 	m_vertex->compile();
 
-	glAttachShader(m_handle, m_frag->getHandle());
-	glAttachShader(m_handle, m_vertex->getHandle());
+	glAttachShader(m_handle, m_frag->get_handle());
+	glAttachShader(m_handle, m_vertex->get_handle());
 
 	if (m_geom)
 	{
 		m_geom->compile();
-		glAttachShader(m_handle, m_geom->getHandle());
+		glAttachShader(m_handle, m_geom->get_handle());
 	}
 
 	if (m_tessEval && m_tessControl)
 	{
 		m_tessEval->compile();
 		m_tessControl->compile();
-		glAttachShader(m_handle, m_tessEval->getHandle());
-		glAttachShader(m_handle, m_tessControl->getHandle());
+		glAttachShader(m_handle, m_tessEval->get_handle());
+		glAttachShader(m_handle, m_tessControl->get_handle());
 	}
 
 	GLenum err = glGetError();
@@ -173,18 +173,18 @@ void Mage::Program::link()
 	glLinkProgram(m_handle);
 
 	// Detach shaders from the program.
-	glDetachShader(m_handle, m_frag->getHandle());
-	glDetachShader(m_handle, m_vertex->getHandle());
+	glDetachShader(m_handle, m_frag->get_handle());
+	glDetachShader(m_handle, m_vertex->get_handle());
 
 	if (m_geom)
 	{
-		glDetachShader(m_handle, m_geom->getHandle());
+		glDetachShader(m_handle, m_geom->get_handle());
 	}
 
 	if (m_tessEval && m_tessControl)
 	{
-		glDetachShader(m_handle, m_tessEval->getHandle());
-		glDetachShader(m_handle, m_tessControl->getHandle());
+		glDetachShader(m_handle, m_tessEval->get_handle());
+		glDetachShader(m_handle, m_tessControl->get_handle());
 	}
 
 	// Did everything go according to plan?

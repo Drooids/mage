@@ -5,6 +5,7 @@
 
 #include <GL/glew.h>
 
+#include <mage/exception.hpp>
 #include <mage/noncopyable.hpp>
 
 namespace Mage
@@ -32,6 +33,11 @@ namespace Mage
 			return m_size;
 		}
 
+		GLuint get_handle()
+		{
+			return m_handle;
+		}
+
 		template<typename Iterator>
 		void data(Iterator first, Iterator last);
 
@@ -44,10 +50,14 @@ namespace Mage
 	{
 		if (first == last) return;
 
-		auto* ptr = glMapNamedBuffer(m_handle, GL_WRITE_ONLY);
-		typename Iterator::value_type* cptr = reinterpret_cast<typename Iterator::value_type*>(ptr);
+		size_t dist = std::distance(first, last);
+		if (dist > m_size)
+			throw Exception("out of bounds");
 
-		std::copy(first, last, cptr);
+		auto* ptr = reinterpret_cast<typename Iterator::value_type*>(
+			glMapNamedBuffer(m_handle, GL_WRITE_ONLY));
+
+		std::copy(first, last, ptr);
 		glUnmapNamedBuffer(m_handle);
 	}
 
@@ -55,14 +65,18 @@ namespace Mage
 	void Buffer::data(size_t offset, Iterator first, Iterator last)
 	{
 		if (first == last) return;
+		
+		size_t dist = std::distance(first, last);
+		if (dist > m_size - offset)
+			throw Exception("out of bounds");
 
-		void* ptr = glMapNamedBufferRange(
-			m_handle, 
-			offset, std::distance(first, last) * sizeof(Iterator::value_type), 
-			GL_WRITE_ONLY);
+		auto* ptr = reinterpret_cast<typename Iterator::value_type*>(
+			glMapNamedBufferRange(
+				m_handle, 
+				offset, dist * sizeof(Iterator::value_type), 
+				GL_WRITE_ONLY));
 
-		typename Iterator::value_type* cptr = reinterpret_cast<typename Iterator::value_type*>(ptr);
-		std::copy(first, last, cptr);
+		std::copy(first, last, ptr);
 		glUnmapNamedBuffer(m_handle);
 	}
 }

@@ -23,7 +23,7 @@ namespace Mage
 			RenderSystem(HINSTANCE hInstance);
 			virtual ~RenderSystem() = default;
 
-			Mage::RenderingCanvas& createCanvas() override;
+			Mage::RenderingCanvas& create_canvas() override;
 		};
 	}
 }

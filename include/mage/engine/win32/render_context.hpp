@@ -19,7 +19,9 @@ namespace Mage
 			RenderingContext(HINSTANCE hInstance);
 			~RenderingContext();
 			
-			void swapBuffers() override;
+			void swap_buffers() override;
+			uint64_t get_client_width() override;
+			uint64_t get_client_height() override;
 		};
 	}
 }

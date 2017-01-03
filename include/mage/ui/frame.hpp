@@ -1,19 +1,28 @@
 #pragma once
 
-#include <mage/engine/object.hpp>
+#include <string>
+
+#include <mage/engine/shader.hpp>
+#include <mage/ui/layer.hpp>
+#include <mage/ui/element.hpp>
 #include <mage/math/matrix.hpp>
 
 namespace Mage
 {
 	namespace UI
 	{
-		class Frame : public RenderableObject
+		class Frame : public Element
 		{
-			Math::Matrix<float, 2, 2> m_scale;
-			Math::Matrix<float, 2, 2> m_position;
+		protected:
+			Math::Matrix<float, 4, 4> m_model;
+			Math::Matrix<float, 4, 4> m_view;
+			Math::Matrix<float, 4, 4> m_projection;
+			Program& m_prog;
 
 		public:
-			void draw() const override;
+			Frame(const std::string& name, Layer& layer);
+
+			void draw() override;
 		};
 	}
 }

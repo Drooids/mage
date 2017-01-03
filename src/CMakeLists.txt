@@ -6,7 +6,8 @@ set(Mage_ENGINE_SOURCES
 	"engine/ogl_canvas.cpp"
 	"engine/ogl_program.cpp"
 	"engine/ogl_shader_controller.cpp"
-	"engine/ogl_texture.cpp")
+	"engine/ogl_texture.cpp"
+	"engine/ogl_vertex_array.cpp")
 
 set(Mage_ENGINE_TEXT_SOURCES
 	"engine/text/ogl_font.cpp"
@@ -51,6 +52,7 @@ set(Mage_MATH_HEADERS
 	"${Mage_INCLUDE_PATH}/math/vector2.hpp")
 
 set(Mage_UI_HEADERS
+	"${Mage_INCLUDE_PATH}/ui/element.hpp"
 	"${Mage_INCLUDE_PATH}/ui/frame.hpp"
 	"${Mage_INCLUDE_PATH}/ui/layer.hpp")
 

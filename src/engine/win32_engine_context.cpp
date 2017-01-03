@@ -62,12 +62,38 @@ Mage::Win32::RenderingContext::~RenderingContext()
 	wglDeleteContext(m_rc);
 }
 
-void Mage::Win32::RenderingContext::swapBuffers()
+void Mage::Win32::RenderingContext::swap_buffers()
 {
 	if (!SwapBuffers(m_dc))
 	{
 		throw OS::Win32Exception("Swap buffers failed", GetLastError());
 	}
 
-	handleMessages();
+	handle_messages();
+}
+
+uint64_t Mage::Win32::RenderingContext::get_client_width()
+{
+	RECT r;
+	ZeroMemory(&r, sizeof(RECT));
+
+	if (!GetClientRect(get_handle(), &r))
+	{
+		throw OS::Win32Exception("Could not get client information", GetLastError());
+	}
+
+	return r.right - r.left;
+}
+
+uint64_t Mage::Win32::RenderingContext::get_client_height()
+{
+	RECT r;
+	ZeroMemory(&r, sizeof(RECT));
+
+	if (!GetClientRect(get_handle(), &r))
+	{
+		throw OS::Win32Exception("Could not get client information", GetLastError());
+	}
+
+	return r.bottom - r.top;
 }

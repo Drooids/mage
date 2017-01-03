@@ -15,7 +15,7 @@ Mage::OS::Win32Window::Win32Window(HINSTANCE hInstance)
 		// The window class does not yet exist, so we should write it.
 		wc.cbSize = sizeof(WNDCLASSEXW);
 		wc.style = CS_HREDRAW | CS_VREDRAW | CS_OWNDC;
-		wc.lpfnWndProc = windowProcInternal;
+		wc.lpfnWndProc = window_proc_internal;
 		wc.cbClsExtra = 0;
 		wc.cbWndExtra = 0;
 		wc.hInstance = hInstance;
@@ -32,16 +32,26 @@ Mage::OS::Win32Window::Win32Window(HINSTANCE hInstance)
 		}
 	}
 
+	RECT r;
+	ZeroMemory(&r, sizeof(RECT));
+	r.left = GetSystemMetrics(SM_CXSCREEN) / 2 - m_width / 2;
+	r.top = GetSystemMetrics(SM_CYSCREEN) / 2 - m_height / 2;
+	r.right = r.left + m_width;
+	r.bottom = r.top + m_height;
+
+
+	AdjustWindowRectEx(&r, WS_OVERLAPPEDWINDOW, false, WS_EX_APPWINDOW | WS_EX_OVERLAPPEDWINDOW);
+
 	// Create our window.
 	m_handle = CreateWindowExW(
 		WS_EX_APPWINDOW | WS_EX_OVERLAPPEDWINDOW,
 		MAGE_WINDOW_CLASSNAME,
 		L"Mage",
 		WS_OVERLAPPEDWINDOW,
-		50,
-		50,
-		m_width,
-		m_height,
+		r.left,
+		r.top,
+		r.right - r.left,
+		r.bottom - r.top,
 		nullptr,
 		nullptr,
 		hInstance,
@@ -53,18 +63,18 @@ Mage::OS::Win32Window::Win32Window(HINSTANCE hInstance)
 	}
 }
 
-LRESULT CALLBACK Mage::OS::Win32Window::windowProcInternal(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
+LRESULT CALLBACK Mage::OS::Win32Window::window_proc_internal(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam) {
 	return DefWindowProcW(hWnd, msg, wParam, lParam);
 }
 
-void Mage::OS::Win32Window::setTitle(const std::string& title)
+void Mage::OS::Win32Window::set_title(const std::string& title)
 {
 	std::wstring_convert<std::codecvt_utf8_utf16<wchar_t>> converter;
 	SetWindowTextW(m_handle, converter.from_bytes(title).c_str());
 	m_title = title;
 }
 
-void Mage::OS::Win32Window::setVisibility(bool visible)
+void Mage::OS::Win32Window::set_visibility(bool visible)
 {
 	if (ShowWindow(m_handle, visible))
 	{
@@ -72,7 +82,7 @@ void Mage::OS::Win32Window::setVisibility(bool visible)
 	}
 }
 
-void Mage::OS::Win32Window::handleMessages() const
+void Mage::OS::Win32Window::handle_messages() const
 {
 	MSG msg;
 	ZeroMemory(&msg, sizeof(MSG));

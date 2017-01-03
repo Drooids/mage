@@ -13,7 +13,7 @@ Mage::GlyphMap::~GlyphMap()
 	glDeleteTextures(1, &m_handle);
 }
 
-void Mage::GlyphMap::insertGlyph(char32_t ch, Glyph& g)
+void Mage::GlyphMap::insert_glyph(char32_t ch, Glyph& g)
 {
 	if (m_glyphs.find(ch) != m_glyphs.end())
 	{
@@ -96,7 +96,7 @@ Mage::Font::~Font()
 	FT_Done_Face(m_face);
 }
 
-void Mage::Font::setSize(uint32_t size)
+void Mage::Font::set_size(uint32_t size)
 {
 	m_size = size;
 	FT_Set_Pixel_Sizes(m_face, 0, m_size);
@@ -105,19 +105,19 @@ void Mage::Font::setSize(uint32_t size)
 	{
 		m_maps[size] = std::make_unique<GlyphMap>(size);
 
-		loadAsciiCharacters();
+		load_ascii_characters();
 	}
 }
 
-void Mage::Font::loadAsciiCharacters()
+void Mage::Font::load_ascii_characters()
 {
 	for (char32_t ch = 32; ch < 127; ++ch)
 	{
-		loadGlyph(ch);
+		load_glyph(ch);
 	}
 }
 
-void Mage::Font::loadGlyph(char32_t ch)
+void Mage::Font::load_glyph(char32_t ch)
 {
 	auto index = FT_Get_Char_Index(m_face, ch);
 	
@@ -150,6 +150,6 @@ void Mage::Font::loadGlyph(char32_t ch)
 	g.advanceX = static_cast<float>(m_face->glyph->advance.x >> 6);
 	g.advanceY = static_cast<float>(m_face->glyph->advance.y >> 6);
 
-	m_maps[m_size]->insertGlyph(ch, g);
+	m_maps[m_size]->insert_glyph(ch, g);
 	FT_Done_Glyph(m_glyph);
 }

@@ -34,10 +34,10 @@ namespace Mage
 			Shader& operator=(Shader&&);
 			~Shader();
 
-			void addSource(const char*);
+			void add_source(const char*);
 			void compile();
 
-			GLuint getHandle() const
+			GLuint get_handle() const
 			{
 				return m_handle;
 			}
@@ -57,14 +57,14 @@ namespace Mage
 		Program();
 		~Program();
 
-		void addShaderSource(const std::string&, ShaderType);
+		void add_shader_source(const std::string&, ShaderType);
 		void link();
 		void use()
 		{
 			glUseProgram(m_handle);
 		}
 
-		GLuint getHandle() const
+		GLuint get_handle() const
 		{
 			return m_handle;
 		}
@@ -76,8 +76,8 @@ namespace Mage
 		std::map<std::string, std::unique_ptr<Program>> m_programs;
 
 	public:
-		void loadShadersFromDir(const std::string& path);
+		void load_shaders_from_dir(const std::string& path);
 
-		Program& getProgram(const std::string&);
+		Program& get_program(const std::string&);
 	};
 }

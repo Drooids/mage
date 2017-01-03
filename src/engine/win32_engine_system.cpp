@@ -9,7 +9,7 @@ m_instance(hInstance)
 {
 	// We must create a fake context first, so we create a hidden window.
 	OS::Win32Window fakeWindow(m_instance);
-	auto fakeDC = GetDC(fakeWindow.getHandle());
+	auto fakeDC = GetDC(fakeWindow.get_handle());
 	
 	// Create PFD and set the fields we need; the rest are zeroed out.
 	PIXELFORMATDESCRIPTOR pfd;
@@ -65,7 +65,7 @@ m_instance(hInstance)
 	}
 }
 
-Mage::RenderingCanvas& Mage::Win32::RenderSystem::createCanvas()
+Mage::RenderingCanvas& Mage::Win32::RenderSystem::create_canvas()
 {
 	auto ctx = std::make_unique<Win32::RenderingContext>(m_instance);
 	m_canvases.emplace_back(std::make_unique<Mage::RenderingCanvas>(std::move(ctx)));

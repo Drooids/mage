@@ -31,7 +31,7 @@ namespace Mage
 	public:
 		TextEngine() = default;
 
-		Instance& getInstance()
+		Instance& get_instance()
 		{
 			return instance;
 		}

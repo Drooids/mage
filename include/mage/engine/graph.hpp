@@ -3,10 +3,11 @@
 #include <string>
 
 #include <mage/noncopyable.hpp>
-#include <mage/engine/render_canvas.hpp>
 
 namespace Mage
 {
+	class RenderingCanvas;
+
 	class Graph : Noncopyable
 	{
 	protected:
@@ -27,7 +28,7 @@ namespace Mage
 		{
 			return m_name;
 		}
-		const RenderingCanvas& get_canvas() const noexcept
+		RenderingCanvas& get_canvas() const noexcept
 		{
 			return m_canvas;
 		}

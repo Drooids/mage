@@ -10,6 +10,6 @@ namespace Mage
 	public:
 		virtual ~RenderSystem() = default;
 
-		virtual RenderingCanvas& createCanvas() = 0;
+		virtual RenderingCanvas& create_canvas() = 0;
 	};
 }

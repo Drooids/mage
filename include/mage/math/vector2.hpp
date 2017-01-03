@@ -68,8 +68,6 @@ namespace Math
 		{
 			return v1.x * v2.x + v1.y * v2.y;
 		}
-
-
 	};
 
 	inline Vector2f operator+(const Vector2f& a, const Vector2f& b)

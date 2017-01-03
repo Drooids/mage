@@ -61,7 +61,7 @@ namespace Mage
 		GlyphMap(uint32_t size = 14, uint32_t width = 512, uint32_t height = 512);
 		~GlyphMap();
 
-		void insertGlyph(char32_t ch, Glyph& g);
+		void insert_glyph(char32_t ch, Glyph& g);
 
 		void bind() const override;
 	};
@@ -70,8 +70,8 @@ namespace Mage
 	{
 		// Warms up the font by loading ASCII characters into the glyph map of
 		// the current font size.
-		void loadAsciiCharacters();
-		void loadGlyph(char32_t ch);
+		void load_ascii_characters();
+		void load_glyph(char32_t ch);
 
 	protected:
 		FT_Face m_face;
@@ -83,6 +83,6 @@ namespace Mage
 		Font(TextEngine::Instance& instance, const std::string& path);
 		~Font();
 
-		void setSize(uint32_t size);
+		void set_size(uint32_t size);
 	};
 }

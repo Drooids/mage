@@ -4,6 +4,8 @@
 
 #include <mage/noncopyable.hpp>
 #include <mage/engine/shader.hpp>
+#include <mage/engine/buffer.hpp>
+#include <mage/ui/layer.hpp>
 
 namespace Mage
 {
@@ -20,7 +22,9 @@ namespace Mage
 	public:
 		virtual ~RenderingContext() = default;
 
-		virtual void swapBuffers() = 0;
+		virtual void swap_buffers() = 0;
+		virtual uint64_t get_client_width() = 0;
+		virtual uint64_t get_client_height() = 0;
 	};
 
 	/**
@@ -31,26 +35,51 @@ namespace Mage
 	 *
 	 * \brief RenderingCanvas manages the drawing state and render calls.
 	 */
-	class RenderingCanvas final : Noncopyable
+	class RenderingCanvas : Noncopyable
 	{
 	protected:
 		std::unique_ptr<RenderingContext> m_context;
 		Mage::ShaderController m_sh_controller;
+		Buffer m_quad_buf;
+		Mage::UI::Layer m_ui_layer;
+
+		uint64_t m_height;
+		uint64_t m_width;
 
 	public:
 		RenderingCanvas(std::unique_ptr<RenderingContext> context);
 		~RenderingCanvas() = default;
 
-		void renderNextFrame(float delta) const;
+		void render_next_frame(float delta);
 		
-		RenderingContext& getContext() const
+		RenderingContext& get_context() const
 		{
 			return *m_context;
 		}
 
-		ShaderController& getShaderController()
+		ShaderController& get_shader_controller()
 		{
 			return m_sh_controller;
+		}
+
+		UI::Layer& get_ui_layer()
+		{
+			return m_ui_layer;
+		}
+
+		uint64_t get_viewport_height() const
+		{
+			return m_height;
+		}
+
+		uint64_t get_viewport_width() const
+		{
+			return m_width;
+		}
+
+		Buffer& get_basic_quad()
+		{
+			return m_quad_buf;
 		}
 	};
 }

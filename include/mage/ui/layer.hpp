@@ -8,6 +8,8 @@
 
 namespace Mage
 {
+	class RenderingCanvas;
+	
 	namespace UI
 	{
 		class Layer : public Graph
@@ -25,10 +27,10 @@ namespace Mage
 			void draw() override;
 
 			template<typename T, typename... Args>
-			T& createElement(const std::string& name, Args&&... args)
+			T& create_element(const std::string& name, Args&&... args)
 			{
-				m_elements.emplace_back(std::make_unique<T>(std::forward(args)...));
-				return m_elements.back();
+				m_elements.emplace_back(std::make_unique<T>(name, *this, std::forward(args)...));
+				return reinterpret_cast<T&>(*m_elements.back());
 			}
 		};
 	}

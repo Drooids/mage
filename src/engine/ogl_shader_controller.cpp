@@ -8,7 +8,7 @@
 
 namespace fs = boost::filesystem;
 
-void Mage::ShaderController::loadShadersFromDir(const std::string& path)
+void Mage::ShaderController::load_shaders_from_dir(const std::string& path)
 {
 	fs::path p(path);
 	fs::directory_iterator end;
@@ -50,7 +50,7 @@ void Mage::ShaderController::loadShadersFromDir(const std::string& path)
 			m_programs[shaderName] = std::make_unique<Program>();
 		}
 
-		m_programs[shaderName]->addShaderSource(src, t);
+		m_programs[shaderName]->add_shader_source(src, t);
 	}
 
 	for (auto& p : m_programs)
@@ -59,7 +59,7 @@ void Mage::ShaderController::loadShadersFromDir(const std::string& path)
 	}
 }
 
-Mage::Program& Mage::ShaderController::getProgram(const std::string& name)
+Mage::Program& Mage::ShaderController::get_program(const std::string& name)
 {
 	return *m_programs[name];
 }

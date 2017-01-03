@@ -13,6 +13,6 @@ namespace Mage
 	public:
 		virtual ~RenderableObject() = default;
 
-		virtual void draw() const = 0;
+		virtual void draw() = 0;
 	};
 }

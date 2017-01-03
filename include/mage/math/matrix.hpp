@@ -84,9 +84,9 @@ namespace Math
 			return M2;
 		}
 
-		T* unsafe_ptr() const noexcept
+		T* unsafe_ptr() noexcept
 		{
-			return ptr;
+			return ptr.data();
 		}
 
 		static constexpr size_t rows = R;

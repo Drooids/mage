@@ -28,7 +28,7 @@ namespace Mage
 		~Texture2D();
 
 		void bind() const override;
-		GLuint getHandle() const
+		GLuint get_handle() const
 		{
 			return m_handle;
 		}
